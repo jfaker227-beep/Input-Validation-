@@ -1,0 +1,33 @@
+<?php
+
+$username = "";
+$password = "";
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if (empty($_POST["username"])) {
+        $errors[] = "Username is required";
+    } else {
+        $username = htmlspecialchars(trim($_POST["username"]));
+    }
+
+    if (empty($_POST["password"])) {
+        $errors[] = "Password is required";
+    } else {
+        $password = trim($_POST["password"]);
+    }
+
+    if (strlen($password) < 6) {
+        $errors[] = "Password must be at least 6 characters";
+    }
+
+    if (empty($errors)) {
+        echo "Input is valid!";
+    } else {
+        foreach ($errors as $error) {
+            echo $error . "<br>";
+        }
+    }
+}
+?>
